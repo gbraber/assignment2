@@ -26,10 +26,10 @@ INSERT INTO customer VALUES ("14", "Peter", "Griffens", "Providence", "987-4567"
 INSERT INTO purchased VALUES ("21", "99", 20);
 INSERT INTO purchased VALUES ("21", "12", 14);
 INSERT INTO purchased VALUES ("21", "66", 10);
-INSERT INTO purchased VALUES ("14", "99", 1);
-INSERT INTO purchased VALUES ("14", "12", 2);
-INSERT INTO purchased VALUES ("14", "78", 4);
-INSERT INTO purchased VALUES ("14", "66", 2);
+INSERT INTO purchased VALUES ("31", "99", 1);
+INSERT INTO purchased VALUES ("31", "12", 2);
+INSERT INTO purchased VALUES ("31", "78", 4);
+INSERT INTO purchased VALUES ("31", "66", 2);
 INSERT INTO purchased VALUES ("15", "66", 2);
 INSERT INTO purchased VALUES ("15", "78", 2);
 INSERT INTO purchased VALUES ("14", "66", 19);
