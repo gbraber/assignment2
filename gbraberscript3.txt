@@ -51,7 +51,7 @@ SELECT agent.FirstName, agent.LastName, customer.FirstName, customer.LastName FR
     WHERE agent.City = customer.City;
 
 -- Query 13
-SELECT SUM(Quantity) FROM purchased
+SELECT SUM(purchased.Quantity) FROM purchased
     INNER JOIN product ON purchased.ProductID = product.ProductID
     WHERE product.Description = "Knee Pads";
 
