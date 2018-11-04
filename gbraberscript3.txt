@@ -55,7 +55,7 @@ SELECT SUM(purchased.Quantity) FROM purchased
     INNER JOIN product ON purchased.ProductID = product.ProductID
     WHERE product.Description = "Knee Pads";
 
---Query 14
+-- Query 14
 SELECT DISTINCT product.Description FROM product
     INNER JOIN purchased ON product.ProductID = purchased.ProductID
     WHERE purchased.ProductID IN (SELECT ProductID FROM purchased
