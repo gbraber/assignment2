@@ -1,0 +1,67 @@
+-- Query 1
+SELECT Description FROM product;
+
+-- Query 2
+SELECT DISTINCT City FROM customer;
+
+-- Query 3
+SELECT * FROM agent ORDER BY City;
+
+-- Query 4
+SELECT FirstName, LastName FROM customer WHERE City = "Springfield";
+
+-- Query 5
+SELECT customer.LastName FROM customer
+    INNER JOIN agent ON customer.DealsWithAgent = agent.AgentID
+    WHERE agent.FirstName = "Regis";
+
+-- Query 6
+SELECT Description FROM product WHERE Description LIKE "%pad%" OR Description LIKE "%Pad%";
+
+-- Query 7
+SELECT customer.LastName, product.Description, purchased.Quantity FROM customer
+    INNER JOIN purchased ON customer.CustomerID = purchased.CustomerID
+    INNER JOIN product ON purchased.ProductID = product.ProductID;
+
+-- Query 8
+SELECT SUM(purchased.Quantity) AS "Homer's Total " FROM purchased
+    INNER JOIN customer ON purchased.CustomerID = customer.CustomerID
+    WHERE customer.FirstName = "Homer";
+
+-- Query 9
+SELECT customer.FirstName, customer.LastName, SUM(purchased.Quantity) FROM purchased
+    INNER JOIN customer ON purchased.CustomerID = customer.CustomerID
+    GROUP BY purchased.CustomerID;
+
+-- Query 10
+SELECT Description, Quantity FROM product
+    WHERE ProductID NOT IN (SELECT ProductID FROM purchased);
+
+-- Query 11
+SELECT Description, Quantity FROM product
+    WHERE ProductID NOT IN (SELECT purchased.ProductID FROM purchased
+    INNER JOIN customer ON purchased.CustomerID = customer.CustomerID
+    WHERE customer.FirstName = "Fred" AND customer.LastName = "Flintstone");
+
+-- Query 12
+SELECT agent.FirstName, agent.LastName, customer.FirstName, customer.LastName FROM agent
+    INNER JOIN customer ON agent.AgentID = customer.DealsWithAgent
+    WHERE agent.City = customer.City;
+
+-- Query 13
+SELECT SUM(Quantity) FROM purchased
+    INNER JOIN product ON purchased.ProductID = product.ProductID
+    WHERE product.Description = "Knee Pads";
+
+--Query 14
+SELECT DISTINCT product.Description FROM product
+    INNER JOIN purchased ON product.ProductID = purchased.ProductID
+    WHERE purchased.ProductID IN (SELECT ProductID FROM purchased
+    GROUP BY ProductID HAVING COUNT(ProductID) > 3);
+
+-- Query 15
+SEELCT agent.FirstName, agent.LastName FROM agent
+    INNER JOIN customer ON agent.AgentID = customer.DealsWithAgent
+    INNER JOIN purchased ON customer.CustomerID = purchased.CustomerID;
+    INNER JOIN product ON purchased.ProductID = product.ProductID
+    WHERE product.Description = "Knee Pads";
