@@ -62,7 +62,7 @@ SELECT DISTINCT product.Description FROM product
     GROUP BY ProductID HAVING COUNT(ProductID) > 3);
 
 -- Query 15
-SEELCT agent.FirstName, agent.LastName FROM agent
+SELECT agent.FirstName, agent.LastName FROM agent
     INNER JOIN customer ON agent.AgentID = customer.DealsWithAgent
     INNER JOIN purchased ON customer.CustomerID = purchased.CustomerID;
     INNER JOIN product ON purchased.ProductID = product.ProductID
