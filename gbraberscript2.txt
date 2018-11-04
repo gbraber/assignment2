@@ -43,7 +43,7 @@ UPDATE customer SET FirstName = "Wonder", LastName = "Woman" WHERE FirstName = "
 
 UPDATE purchased INNER JOIN customer ON purchased.CustomerID = customer.CustomerID SET Quantity = 5 WHERE customer.FirstName = "Sideshow";
 
-UPDATE customer INNER JOIN agent ON customer.DealsWithAgent = agent.AgentID SET City = "Boston" WHERE agent.FirstName = "Regis";
+UPDATE customer INNER JOIN agent ON customer.DealsWithAgent = agent.AgentID SET customer.City = "Boston" WHERE agent.FirstName = "Regis";
 
 SELECT * FROM product;
 SELECT * FROM agent;
