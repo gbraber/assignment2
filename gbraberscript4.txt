@@ -1,0 +1,26 @@
+USE gbraberassign2db;
+
+SELECT * FROM customer;
+SELECT * FROM agent
+SELECT * FROM product;
+SELECT * FROM purchased;
+
+CREATE VIEW PurchaseHistory AS 
+    SELECT customer.firstName, customer.LastName, product.Description, purchased.Quantity, product.CostPerItem, purchased.Quantity * product.CostPerItem AS "Total Cost"
+    FROM customer
+    INNER JOIN purchased ON customer.CustomerID = purchased.CustomerID
+    INNER JOIN product ON purchased.ProductID = product.ProductID
+    ORDER BY customer.LastName;
+
+SELECT * FROM PurchaseHistory;
+
+SELECT * FROM PurchaseHistory
+    WHERE Quantity * CostPerItem > 100;
+
+DELETE FROM product WHERE Description = "Hockey stick";
+
+SELECT * FROM product WHERE Description = "Hockey stick";
+
+DELETE FROM agent WHERE City = "Springfield";
+-- The agents not deleted were referenced as foreign keys in the purchased table, and deleting them would break referential integrity.
+-- All agents not appearing in purchased were deleted.
