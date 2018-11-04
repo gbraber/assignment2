@@ -16,7 +16,7 @@ SHOW TABLES;
 
 CREATE TABLE product (ProductID CHAR(2) NOT NULL,
                         Description CHAR(20),
-                        CostPerItem INT,
+                        CostPerItem DOUBLE,
                         Quantity INT,
                         PRIMARY KEY(ProductID));
 CREATE TABLE agent (AgentID CHAR(2) NOT NULL,
@@ -39,4 +39,3 @@ CREATE TABLE purchased (CustomerID CHAR(2) NOT NULL,
                         FOREIGN KEY(ProductID) REFERENCES product(ProductID));
 
 SHOW TABLES;
-
