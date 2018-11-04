@@ -29,8 +29,10 @@ CREATE TABLE customer (CustomerID CHAR(2) NOT NULL,
                         FirstName CHAR(30),
                         LastName CHAR(30),
                         City CHAR(15),
-                        PhoneNumber CHAR(10),
-                        PRIMARY KEY(CustomerID));
+                        PhoneNumber CHAR(12),
+                        DealsWithAgent CHAR(2),
+                        PRIMARY KEY(CustomerID)
+                        FOREIGN KEY(DealsWithAgent) REFERENCES agent(AgentID));
 CREATE TABLE purchased (CustomerID CHAR(2) NOT NULL,
                         ProductID CHAR(2) NOT NULL,
                         Quantity INT,
