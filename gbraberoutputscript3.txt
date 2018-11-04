@@ -1,0 +1,167 @@
+ERROR 1064 (42000) at line 68: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INNER JOIN product ON purchased.ProductID = product.ProductID
+    WHERE product.' at line 1
+--------------
+SELECT Description FROM product
+--------------
+
+Description
+Bike
+Socks
+Hockey stick
+Elbow pads
+Knee Pads
+Roller Blades
+Helmet
+--------------
+SELECT DISTINCT City FROM customer
+--------------
+
+City
+Boston
+Springfield
+Kypto
+Providence
+--------------
+SELECT * FROM agent ORDER BY City
+--------------
+
+AgentID	FirstName	LastName	City	CommissionPercentage
+33	David	Letterman	Bedrock	100
+11	Regis	Philbin	Boston	33
+22	Courtney	Cox	New York	25
+34	Graeme	Brabers	Oakville	100
+12	Rosie	Cox	Ottawa	50
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfield	16
+--------------
+SELECT FirstName, LastName FROM customer WHERE City = "Springfield"
+--------------
+
+FirstName	LastName
+Monty	Burns
+Homer	Simpson
+Sideshow	Bob
+--------------
+SELECT customer.LastName FROM customer
+    INNER JOIN agent ON customer.DealsWithAgent = agent.AgentID
+    WHERE agent.FirstName = "Regis"
+--------------
+
+LastName
+Rubble
+Flintstone
+--------------
+SELECT Description FROM product WHERE Description LIKE "%pad%" OR Description LIKE "%Pad%"
+--------------
+
+Description
+Elbow pads
+Knee Pads
+--------------
+SELECT customer.LastName, product.Description, purchased.Quantity FROM customer
+    INNER JOIN purchased ON customer.CustomerID = purchased.CustomerID
+    INNER JOIN product ON purchased.ProductID = product.ProductID
+--------------
+
+LastName	Description	Quantity
+Griffens	Elbow pads	19
+Flintstone	Elbow pads	2
+Flintstone	Knee Pads	2
+Simpson	Socks	14
+Simpson	Elbow pads	10
+Simpson	Helmet	20
+Bob	Socks	5
+Bob	Elbow pads	5
+Bob	Knee Pads	5
+Bob	Helmet	5
+--------------
+SELECT SUM(purchased.Quantity) AS "Homer's Total " FROM purchased
+    INNER JOIN customer ON purchased.CustomerID = customer.CustomerID
+    WHERE customer.FirstName = "Homer"
+--------------
+
+Homer's Total 
+44
+--------------
+SELECT customer.FirstName, customer.LastName, SUM(purchased.Quantity) FROM purchased
+    INNER JOIN customer ON purchased.CustomerID = customer.CustomerID
+    GROUP BY purchased.CustomerID
+--------------
+
+FirstName	LastName	SUM(purchased.Quantity)
+Peter	Griffens	19
+Fred	Flintstone	4
+Homer	Simpson	44
+Sideshow	Bob	20
+--------------
+SELECT Description, Quantity FROM product
+    WHERE ProductID NOT IN (SELECT ProductID FROM purchased)
+--------------
+
+Description	Quantity
+Bike	200
+Hockey stick	50
+Roller Blades	89
+--------------
+SELECT Description, Quantity FROM product
+    WHERE ProductID NOT IN (SELECT purchased.ProductID FROM purchased
+    INNER JOIN customer ON purchased.CustomerID = customer.CustomerID
+    WHERE customer.FirstName = "Fred" AND customer.LastName = "Flintstone")
+--------------
+
+Description	Quantity
+Bike	200
+Socks	100
+Hockey stick	50
+Roller Blades	89
+Helmet	30
+--------------
+SELECT agent.FirstName, agent.LastName, customer.FirstName, customer.LastName FROM agent
+    INNER JOIN customer ON agent.AgentID = customer.DealsWithAgent
+    WHERE agent.City = customer.City
+--------------
+
+FirstName	LastName	FirstName	LastName
+Regis	Philbin	Barney	Rubble
+Regis	Philbin	Fred	Flintstone
+Hugh	Grant	Monty	Burns
+Hugh	Grant	Homer	Simpson
+--------------
+SELECT SUM(purchased.Quantity) FROM purchased
+    INNER JOIN product ON purchased.ProductID = product.ProductID
+    WHERE product.Description = "Knee Pads"
+--------------
+
+SUM(purchased.Quantity)
+7
+--------------
+SELECT DISTINCT product.Description FROM product
+    INNER JOIN purchased ON product.ProductID = purchased.ProductID
+    WHERE purchased.ProductID IN (SELECT ProductID FROM purchased
+    GROUP BY ProductID HAVING COUNT(ProductID) > 3)
+--------------
+
+Description
+Elbow pads
+--------------
+SELECT agent.FirstName, agent.LastName FROM agent
+    INNER JOIN customer ON agent.AgentID = customer.DealsWithAgent
+    INNER JOIN purchased ON customer.CustomerID = purchased.CustomerID
+--------------
+
+FirstName	LastName
+Regis	Philbin
+Regis	Philbin
+Rosie	Cox
+Rosie	Cox
+Rosie	Cox
+Rosie	Cox
+Hugh	Grant
+Hugh	Grant
+Hugh	Grant
+Hugh	Grant
+--------------
+INNER JOIN product ON purchased.ProductID = product.ProductID
+    WHERE product.Description = "Knee Pads"
+--------------
+
