@@ -1,0 +1,42 @@
+SHOW DATABASES;
+
+DROP DATABASE IF EXISTS gbraberassign2db;
+
+CREATE DATABASE gbraberassign2db;
+
+USE gbraberassign2db;
+
+GRANT USAGE ON *.* TO 'ta'@'localhost';
+DROP USER 'ta'@'localhost';
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319';
+GRANT ALL PRIVILEGES ON gbraberassign2db.* TO 'ta'@'localhost';
+FLUSH PRIVILEGES;
+
+SHOW TABLES;
+
+CREATE TABLE product (ProductID CHAR(2) NOT NULL,
+                        Description CHAR(20),
+                        CostPerItem INT,
+                        Quantity INT,
+                        PRIMARY KEY(ProductID));
+CREATE TABLE agent (AgentID CHAR(2) NOT NULL,
+                    FirstName CHAR(30),
+                    LastName CHAR(30),
+                    City CHAR(15),
+                    CommissionPercentage INT,
+                    PRIMARY KEY(AgentID));
+CREATE TABLE customer (CustomerID CHAR(2) NOT NULL,
+                        FirstName CHAR(30),
+                        LastName CHAR(30),
+                        City CHAR(15),
+                        PhoneNumber CHAR(10),
+                        PRIMARY KEY(CustomerID));
+CREATE TABLE purchased (CustomerID CHAR(2) NOT NULL,
+                        ProductID CHAR(2) NOT NULL,
+                        Quantity INT,
+                        PRIMARY KEY(CustomerID, ProductID),
+                        FOREIGN KEY(CustomerID) REFERENCES customer(CustomerID),
+                        FOREIGN KEY(ProductID) REFERENCES product(ProductID));
+
+SHOW TABLES;
+
