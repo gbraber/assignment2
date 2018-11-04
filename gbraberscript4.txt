@@ -1,7 +1,7 @@
 USE gbraberassign2db;
 
 SELECT * FROM customer;
-SELECT * FROM agent
+SELECT * FROM agent;
 SELECT * FROM product;
 SELECT * FROM purchased;
 
