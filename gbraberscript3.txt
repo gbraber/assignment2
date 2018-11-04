@@ -1,3 +1,5 @@
+USE gbraberassign2db
+
 -- Query 1
 SELECT Description FROM product;
 
